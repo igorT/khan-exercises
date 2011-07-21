@@ -4,13 +4,33 @@
 	<title>Trigonometry 2</title>
 	<script src="../khan-exercise.js"></script>
 	<script>
-		function fractionSQRoot(b, a){
-			var gd = KhanUtil.getGCD( KhanUtil.splitRadical(a)[0] , b );
-               		if(KhanUtil.splitRadical(a)[0]/gd != 1){
-				return  "\\frac{" + (b/gd) + "}{" + (KhanUtil.splitRadical(a)[0]/gd) + "\\sqrt{" + KhanUtil.splitRadical(a)[1] + "}}";
-			}
-				return  "\\frac{" + b/gd + "}{" + "\\sqrt{" + KhanUtil.splitRadical(a)[1] + "}}";
-		}
+		 function fractionSQRoot(b, root){
+                        var natRoot = KhanUtil.splitRadical(root)[0];
+                        var underRoot =  KhanUtil.splitRadical(root)[1];        
+                        var d = KhanUtil.reduce(natRoot*underRoot, b)[0];
+                        var n = KhanUtil.reduce(natRoot*underRoot,b)[1];
+                        if ( d == 1 ){
+                                 if(n != 1){
+                                        return   n + "\\sqrt{" + underRoot +"}";
+                                }
+                                else{
+                                        return  "\\sqrt{" +underRoot + "}";
+                                }
+
+                        }
+                        else if( underRoot != 1 ){
+                                if(n != 1){
+                                        return  "\\dfrac{" + n + "\\sqrt{" + underRoot +"} }{"+ d + "}";
+                                }
+                                else{
+                                        return  "\\dfrac{ \\sqrt{" +underRoot + "}}{" + d + "}";
+                                }
+                        }
+                        else{
+                                return "\\dfrac{" + n + "}{" + d + "}";
+                        }
+                }
+
 
 		function betterTriangle(width, height, A, B, C, a, b, c) {
 			var scale = 5 / Math.sqrt(width * width + height * height);
